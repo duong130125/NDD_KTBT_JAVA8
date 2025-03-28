@@ -1,14 +1,18 @@
-package presentation;
+package JAVA_JAVA8.presentation;
 
-import business.CustomerBusiness;
-import entity.Customer;
+import JAVA_JAVA8.business.CustomerBusiness;
+import JAVA_JAVA8.business.IOrderBusiness;
+import JAVA_JAVA8.business.OrderBusiness;
+import JAVA_JAVA8.entity.Customer;
+import JAVA_JAVA8.entity.Order;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class ShopManagement {
-    public static List<Customer> customerList = new ArrayList<>();
+    public static final List<Customer> listCustomers = new ArrayList<Customer>();
+    public static final List<Order> listOrders = new ArrayList<>();
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -58,9 +62,8 @@ public class ShopManagement {
                     CustomerBusiness.addCustomer(scanner);
                     break;
                 case 3:
-                    System.out.println("Kết thúc chương trình");
+                    System.out.println("Quay lại menu chính.");
                     scanner.close();
-                    System.exit(0);
                     break;
                 default:
                     System.err.println("Vui lòng chọn từ 1-3");
@@ -83,21 +86,26 @@ public class ShopManagement {
             scanner.nextLine();
             switch (choice) {
                 case 1:
+                    OrderBusiness.displayOrders();
                     break;
                 case 2:
+                    OrderBusiness.addOrder(scanner);
                     break;
                 case 3:
+                    OrderBusiness.updateOrderStatus(scanner);
                     break;
                 case 4:
+                    System.out.println("Danh sách đơn hàng quá hạn: " + OrderBusiness.getOrderOverdue());
                     break;
                 case 5:
+                    System.out.println("Số lượng đơn hàng đã giao: " + OrderBusiness.getOrderDelivied().size());
                     break;
                 case 6:
+                    System.out.println("Tổng doanh thu: " + IOrderBusiness.getTotalRevenue());
                     break;
                 case 7:
-                    System.out.println("Kết thúc chương trình");
+                    System.out.println("Quay lại menu chính.");
                     scanner.close();
-                    System.exit(0);
                     break;
                 default:
                     System.err.println("Vui lòng chọn từ 1-7");
